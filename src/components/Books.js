@@ -1,23 +1,34 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import BookItem from './BookItem';
+import { React } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import AddBook from './AddBook';
+import Book from './Book';
+import { AddBookFunction, RemoveBookFunction } from '../redux/books/books';
 
-const Books = ({ bookList }) => (
-  <ul className="books-list-section">
-    {bookList.map((book) => (
-      <BookItem key={book.id} book={book} />
-    ))}
-  </ul>
-);
+const Books = () => {
+  const dispatch = useDispatch();
+  const StoredBook = useSelector((state) => state.BooksReducer);
 
-Books.propTypes = {
-  bookList: PropTypes.arrayOf(
-    PropTypes.shape({
-      booktitle: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
-      id: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
+  const AddNewBook = (e, NewBook) => {
+    e.preventDefault();
+    dispatch(AddBookFunction(NewBook));
+  };
+  const RemoveDisplayedBook = (id) => {
+    dispatch(RemoveBookFunction(id));
+  };
+  return (
+    <>
+      {StoredBook.map((item) => (
+        <Book
+          title={item.title}
+          key={item.id}
+          author={item.author}
+          id={item.id}
+          RemoveDisplayedBook={RemoveDisplayedBook}
+        />
+      ))}
+      <AddBook AddNewBook={AddNewBook} />
+    </>
+  );
 };
 
 export default Books;

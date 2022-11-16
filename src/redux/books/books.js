@@ -1,28 +1,37 @@
-const ADD_BOOK = 'bookStore/books/ADD_BOOK';
-const REMOVE_BOOK = 'bookStore/books/REMOVE_BOOK';
+const ADD_BOOK = 'ADD_BOOK';
+const REMOVE_BOOK = 'REMOVE_BOOK';
+const books = [
+  { id: 1, author: 'Kaweesi Matia', title: 'The World Of Technology' },
+  { id: 2, author: 'Bimal Jalal', title: 'The India Story' },
+  { id: 3, author: 'Ruskin Bond', title: 'Listen to Your Heart: The London Adventure' },
+  { id: 4, author: 'Vinit Karnik ', title: 'Business of Sports: The Winning Formula for Success' },
+];
 
-const initialState = [];
-export const addBook = (payload) => ({
+export const AddBookFunction = (NewBook) => ({
   type: ADD_BOOK,
-  payload,
+  payload: NewBook,
 });
-
-export const removeBook = (payload) => ({
+export const RemoveBookFunction = (id) => ({
   type: REMOVE_BOOK,
-  payload,
+  id,
 });
 
-const BookReducer = (state = initialState, action) => {
+const BooksReducer = (state = books, action) => {
   switch (action.type) {
     case ADD_BOOK:
-      return [...state, action.payload];
-
+      return [
+        ...state,
+        {
+          id: Date.now(),
+          title: action.payload.title,
+          author: action.payload.author,
+        },
+      ];
     case REMOVE_BOOK:
-      return state.filter((book) => book.id !== action.payload);
-
+      return state.filter((book) => book.id !== action.id);
     default:
       return state;
   }
 };
 
-export default BookReducer;
+export default BooksReducer;
