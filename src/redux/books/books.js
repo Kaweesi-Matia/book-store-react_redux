@@ -1,20 +1,30 @@
+import axios from 'axios';
+
 const ADD_BOOK = 'ADD_BOOK';
 const REMOVE_BOOK = 'REMOVE_BOOK';
-const books = [
-  { id: 1, author: 'Kaweesi Matia', title: 'The World Of Technology' },
-  { id: 2, author: 'Bimal Jalal', title: 'The India Story' },
-  { id: 3, author: 'Ruskin Bond', title: 'Listen to Your Heart: The London Adventure' },
-  { id: 4, author: 'Vinit Karnik ', title: 'Business of Sports: The Winning Formula for Success' },
-];
+const GET_BOOKS = 'GET_BOOKS';
+const books = [];
 
-export const AddBookFunction = (NewBook) => ({
-  type: ADD_BOOK,
-  payload: NewBook,
-});
-export const RemoveBookFunction = (id) => ({
-  type: REMOVE_BOOK,
-  id,
-});
+export const AddBookFunction = (NewBook) => async (dispatch) => {
+  try {
+    await axios.post(`${process.env.REACT_APP_BASE_URL}`, NewBook);
+    return dispatch({ type: ADD_BOOK, payload: NewBook });
+  } catch (err) { return err; }
+};
+
+export const RemoveBookFunction = (id) => async (dispatch) => {
+  try {
+    await axios.delete(`${process.env.REACT_APP_BASE_URL}/${id}`);
+    return dispatch({ type: REMOVE_BOOK, id });
+  } catch (err) { return err; }
+};
+
+export const getBooksFunction = () => async (dispatch) => {
+  try {
+    const response = await axios.get(`${process.env.REACT_APP_BASE_URL}`);
+    return dispatch({ type: GET_BOOKS, payload: response.data });
+  } catch (err) { return err; }
+};
 
 const BooksReducer = (state = books, action) => {
   switch (action.type) {
@@ -22,13 +32,17 @@ const BooksReducer = (state = books, action) => {
       return [
         ...state,
         {
-          id: Date.now(),
+          id: action.payload.item_id,
           title: action.payload.title,
           author: action.payload.author,
+          category: action.payload.category,
         },
       ];
     case REMOVE_BOOK:
       return state.filter((book) => book.id !== action.id);
+    case GET_BOOKS:
+      return Object.keys(action.payload)
+        .map((el) => ({ ...action.payload[el][0], id: el }));
     default:
       return state;
   }
