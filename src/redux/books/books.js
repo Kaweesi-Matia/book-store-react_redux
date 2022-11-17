@@ -1,37 +1,82 @@
-const ADD_BOOK = 'ADD_BOOK';
-const REMOVE_BOOK = 'REMOVE_BOOK';
-const books = [
-  { id: 1, author: 'Kaweesi Matia', title: 'The World Of Technology' },
-  { id: 2, author: 'Bimal Jalal', title: 'The India Story' },
-  { id: 3, author: 'Ruskin Bond', title: 'Listen to Your Heart: The London Adventure' },
-  { id: 4, author: 'Vinit Karnik ', title: 'Business of Sports: The Winning Formula for Success' },
-];
+const ADD_BOOK = 'bookStore/books/ADD_BOOK';
+const REMOVE_BOOK = 'bookStore/books/REMOVE_BOOK';
+const FETCH_BOOKS = 'bookstore/books/FETCH_BOOKS';
+const urlLink = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/FC6WAWWYKH3uR0KochTL/books';
 
-export const AddBookFunction = (NewBook) => ({
+const initialState = [];
+
+export const addBook = (payload) => ({
   type: ADD_BOOK,
-  payload: NewBook,
-});
-export const RemoveBookFunction = (id) => ({
-  type: REMOVE_BOOK,
-  id,
+  payload,
 });
 
-const BooksReducer = (state = books, action) => {
+export const removeBook = (payload) => ({
+  type: REMOVE_BOOK,
+  payload,
+});
+
+export const fetchBook = (payload) => ({
+  type: FETCH_BOOKS,
+  payload,
+});
+
+const BookReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_BOOK:
-      return [
-        ...state,
-        {
-          id: Date.now(),
-          title: action.payload.title,
-          author: action.payload.author,
-        },
-      ];
+      return [...state, action.payload];
+
     case REMOVE_BOOK:
-      return state.filter((book) => book.id !== action.id);
+      return state.filter((book) => book.id !== action.payload);
+
+    case FETCH_BOOKS:
+      return action.payload;
+
     default:
       return state;
   }
 };
 
-export default BooksReducer;
+export const fetchBooksList = () => async (dispatch) => {
+  const booksList = await fetch(`${urlLink}`)
+    .then((response) => response.json());
+  const booksID = Object.keys(booksList);
+  const formBooks = [];
+  booksID.map((key) => formBooks.push({
+    id: key,
+    title: booksList[key][0].title,
+    author: booksList[key][0].author,
+    category: booksList[key][0].category,
+  }));
+  dispatch(fetchBook(formBooks));
+};
+
+export const postBook = (newBook) => async (dispatch) => {
+  await fetch(`${urlLink}`, {
+    method: 'POST',
+    body: JSON.stringify({
+      item_id: newBook.id,
+      title: newBook.title,
+      author: newBook.author,
+      category: newBook.category,
+    }),
+    headers: {
+      'content-type': 'application/json; charset=UTF-8',
+    },
+  });
+  dispatch(addBook(newBook));
+};
+
+export const deleteBook = (id) => async (dispatch) => {
+  await fetch(`${urlLink}/${id}`, {
+    method: 'DELETE',
+    body: JSON.stringify({
+      item_id: id,
+    }),
+    headers: {
+      'content-type': 'application/json; charset=UTF-8',
+    },
+  });
+  dispatch(removeBook(id));
+};
+
+export default BookReducer;
