@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Slab:wght@300&display=swap');
+
+:root {
+  --main-acent-color: #0290ff;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Montserrat, 'Times New Roman', Times, serif;
+  background-color: whitesmoke;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.d-flex h1 {
+  font-size: 30px;
+  font-family: Montserrat, serif;
+  font-weight: bold;
+}
+
+.d-flex li {
+  font-size: 14px;
+  font-family: Montserrat, serif;
+}
+
+/* .navigation_container {
+  background: #fff;
+  border-bottom: 1px solid #e8e8e8;
+} */
+
+.Navigation {
+  justify-content: space-between;
+  width: 81%;
+  height: 76px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.Navigation ul {
+  align-items: center;
+  padding: 0;
+  margin-left: 47px;
+}
+
+.booksList_section > li {
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  margin: 12px 0;
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid rgb(232, 232, 232);
+  background: rgb(255, 255, 255);
+}
+
+.Navigation > ul > li {
+  list-style: none;
+  padding: 12px 32px 10px 0;
+}
+
+.booksList_section li > .second_column > li {
+  list-style: none;
+}
+
+.booksList_section li > .second_column > li:nth-child(3) {
+  padding-left: 64px;
+  padding-right: 70px;
+  line-height: 8px;
+  border-left: 1px solid rgb(232, 232, 232);
+}
+
+.percentage_value {
+  margin: 0;
+  font-size: 32px;
+  color: rgb(18, 18, 18);
+}
+
+.completed {
+  opacity: 0.6;
+  font-size: 14px;
+  color: rgb(18, 18, 18);
+}
+
+.booksList_section li > .second_column > li:nth-child(2) {
+  padding-left: 10px;
+  padding-right: 88px;
+}
+
+.last_column {
+  font-family: RobotSlab, sans-serif;
+}
+
+.last_column .current_chapter {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(18, 18, 18);
+  opacity: 0.6;
+}
+
+.last_column > button {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(255, 255, 255);
+  border-radius: 4px;
+  background: var(--main-acent-color);
+  border: none;
+  padding: 6px 10px;
+  width: max-content;
+  text-align: center;
+}
+
+.Navigation > ul > li > a {
+  text-decoration: none;
+}
+
+.add_book {
+  justify-content: space-between;
+}
+
+.Navigation ul > *:hover {
+  cursor: pointer;
+}
+
+.Navigation > ul > li:nth-child(2) a {
+  font-size: 14px;
+  letter-spacing: 1.8px;
+  color: rgb(18, 18, 18);
+}
+
+.Navigation > ul > li:nth-child(3) a {
+  color: rgb(18, 18, 18);
+  opacity: 0.6;
+  font-size: 14px;
+  letter-spacing: 1.8px;
+}
+
+.Navigation > ul > li:nth-child(1) h1 a {
+  font-size: 30px;
+  text-decoration: none;
+  color: var(--main-acent-color);
+}
+
+.category {
+  margin: 0;
+  opacity: 0.6;
+  font-weight: bold;
+  color: rgb(18, 18, 18);
+  font-size: 14px;
+}
+
+.title {
+  font-family: RobotoSlab, sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  color: rgb(18, 18, 18);
+  margin: 0;
+}
+
+.Author {
+  margin: 0 0 16px 0;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: RobotoSlab, sans-serif;
+  color: rgb(67, 134, 191);
+}
+
+.first_Column .firstCol_buttons button {
+  font-size: 14px;
+  font-weight: 400;
+  font-family: RobotoSlab, sans-serif;
+  border: none;
+  color: rgb(67, 134, 191);
+  padding: 0 11px 0 11px;
+  border-right: 1px solid #e8e8e8;
+  cursor: pointer;
+  background: transparent;
+}
+
+.firstCol_buttons button:last-child {
+  border: none;
+}
+
+.firstCol_buttons button:first-child {
+  padding-left: 0;
+}
+
+.userProfile-container {
+  justify-content: center;
+  align-items: center;
+  border: solid 1px rgb(232, 232, 232);
+  border-radius: 50%;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+.add_book-section {
+  flex-direction: column;
+  padding-bottom: 80px;
+}
+
+.books {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.hr {
+  margin: 36px 0 16px 0;
+  background: rgb(232, 232, 232);
+  height: 0.06rem;
+}
+
+.add_book-section h1 {
+  margin-left: 38px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  color: rgb(136, 136, 136);
+}
+
+:is(input, select) {
+  border-radius: 3px;
+  border: solid 1px rgb(232, 232, 232);
+  background-color: whitesmoke;
+  padding: 10px;
+  width: 25%;
+}
+
+:is(input, select):focus {
+  outline: 3px solid rgb(2, 144, 255);
+}
+
+select {
+  width: 20% !important;
+}
+
+.add_book-section > .add_book > button {
+  font-size: 14px;
+  font-weight: 400;
+  border: none;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  border-radius: 4px;
+  background: var(--main-acent-color);
+  padding: 10px;
+  width: 16%;
+}
+
+option:first-child {
+  color: rgb(153, 153, 153);
+}
