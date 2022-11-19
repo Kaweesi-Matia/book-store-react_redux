@@ -28,12 +28,12 @@ Linters Installed
 - Open GitHub URL of repositry.
 - Download Code repo in zip.
 - Extract and open repo folder into visual studio code or any other Text Editor Software.
-- GitHub Repositry URL: https://github.com/MudasirSherwani/bookstore-react
+- GitHub Repositry URL: https://github.com/Kaweesi-Matia/book-store-react_redux
   To get a local copy up and running follow these simple example steps.
 
 ## How to perform Test
 
-- After Clone the GitHub Repositry from URL: https://github.com/MudasirSherwani/bookstore-react
+- After Clone the GitHub Repositry from URL: https://github.com/Kaweesi-Matia/book-store-react_redux
 - Open terminal and run the command "npm run test".
 - This command will show you the results of testing.
 
